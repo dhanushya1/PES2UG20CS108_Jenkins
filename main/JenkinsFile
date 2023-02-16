@@ -1,0 +1,27 @@
+pipeline  {
+  agent any
+  stages{
+    stage('Build'){
+      steps {
+        sh 'g++ new.cpp -o new_exec'
+        echo 'Build Stage Done'
+      }
+    }
+    stage('Test'){
+      steps {
+        sh './new_exec'
+        echo 'Test Stage Done'
+      }
+    }
+    stage('Deploy'){
+      steps{
+        echo 'Deployment Stage Done'
+      }
+    }
+  }
+  post {
+    failure {
+      echo 'Pipeline failed'
+    }
+  }
+}
